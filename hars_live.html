@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HARS — Women's Fashion SS'25</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#c9b896;border-radius:3px}
+@keyframes shimmer{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes tryOnIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+#hero-bg{position:relative;width:100%;overflow:hidden;transition:background-color 650ms cubic-bezier(.4,0,.2,1)}
+#hero-inner{position:relative;width:100%;height:100vh;overflow:hidden}
+#grain{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:50;background-size:200px 200px;opacity:.38}
+#bot-grad{position:absolute;top:0;left:0;right:0;bottom:0;z-index:4;background:linear-gradient(to top,rgba(0,0,0,.22) 0%,transparent 48%);pointer-events:none}
+#ghost{position:absolute;left:0;right:0;top:14%;display:flex;align-items:center;justify-content:center;pointer-events:none;user-select:none;z-index:2}
+#ghost span{font-family:'Anton',sans-serif;font-size:clamp(88px,30vw,370px);font-weight:900;color:white;opacity:.15;line-height:1;text-transform:uppercase;letter-spacing:-.02em;white-space:nowrap}
+#nav-l{position:absolute;top:24px;left:32px;z-index:60;font-size:11px;font-weight:600;text-transform:uppercase;color:white;opacity:.92;letter-spacing:.22em}
+#nav-r{position:absolute;top:24px;right:32px;z-index:60;font-size:10px;font-weight:500;text-transform:uppercase;color:white;opacity:.68;letter-spacing:.16em}
+#nav-c{position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:60;font-size:10px;font-weight:500;text-transform:uppercase;color:white;opacity:.72;letter-spacing:.2em;white-space:nowrap}
+#carousel{position:absolute;top:0;left:0;right:0;bottom:0;z-index:3}
+.ci{position:absolute;aspect-ratio:2/3;overflow:hidden;will-change:transform,filter,opacity}
+#ctrl-left{position:absolute;bottom:76px;left:88px;z-index:60;max-width:300px}
+#slide-lbl{font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px;font-size:20px;color:white;opacity:.96}
+#slide-dsc{font-size:13px;color:white;opacity:.78;line-height:1.65;margin-bottom:20px;max-width:240px}
+.nav-btns{display:flex;gap:12px}
+.nbtn{width:58px;height:58px;border-radius:50%;background:transparent;border:2px solid rgba(255,255,255,.8);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 150ms,background 150ms;flex-shrink:0}
+.nbtn:hover{transform:scale(1.08);background:rgba(255,255,255,.14)}
+#shop-btn{position:absolute;bottom:76px;right:40px;z-index:60;display:flex;align-items:center;gap:8px;font-family:'Anton',sans-serif;font-size:clamp(18px,4vw,52px);font-weight:400;color:white;opacity:.94;letter-spacing:-.02em;line-height:1;text-transform:uppercase;background:transparent;border:none;cursor:pointer;padding:0;transition:opacity 200ms}
+#shop-btn:hover{opacity:1}
+#dots{position:absolute;top:50%;right:24px;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:8px}
+.dot-btn{width:5px;border-radius:4px;background:rgba(255,255,255,.38);border:none;cursor:pointer;padding:0;transition:all 400ms;height:10px}
+.dot-btn.on{background:white;height:26px}
+#trending-sec{background:#FAF6F1;padding:96px 64px;font-family:'Inter',sans-serif}
+.t-inner{max-width:1220px;margin:0 auto}
+.t-toprow{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.t-live{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.2em;color:#d6446c;text-transform:uppercase}
+.t-viewall{background:transparent;border:none;color:#1c1c1e;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:4px}
+.t-titlerow{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:44px}
+.t-title{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(40px,5vw,68px);letter-spacing:-.02em;color:#1c1c1e;text-transform:uppercase;line-height:1;margin:0}
+.t-sub{font-size:13px;color:#6b6b6b;margin:0;max-width:320px}
+.t-body{display:flex;gap:36px}
+.phone{flex:0 0 320px;background:#16161a;border-radius:34px;padding:14px;box-shadow:0 24px 50px rgba(0,0,0,.18)}
+.ph-topbar{display:flex;align-items:center;justify-content:space-between;padding:2px 6px 10px}
+.ph-dots{display:flex;gap:4px}
+.ph-dot{width:6px;height:6px;border-radius:50%;background:#444;display:inline-block}
+.ph-lbl{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.75);letter-spacing:.12em;display:flex;align-items:center;gap:4px}
+.ph-screen{position:relative;background:linear-gradient(180deg,#fdfaf6,#f1ece3);border-radius:22px;aspect-ratio:3/5;overflow:hidden}
+.ph-screen svg{width:100%;height:100%;display:block}
+.styling-ov{display:none;position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,.55);align-items:center;justify-content:center}
+.styling-ov.show{display:flex}
+.styling-txt{font-size:11px;font-weight:700;letter-spacing:.08em;color:#1c1c1e;text-transform:uppercase;animation:shimmer 700ms ease-in-out infinite}
+.ph-info{padding:12px 4px 4px}
+.ph-name{color:#fff;font-size:13.5px;font-weight:600;margin:0 0 3px}
+.ph-meta{color:rgba(255,255,255,.55);font-size:11px;margin:0}
+.ph-acts{display:flex;gap:8px;margin-top:12px}
+.ph-btn{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:30px;padding:9px 0;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.ph-reset{flex:1;background:transparent;border:1.5px solid rgba(255,255,255,.3);color:#fff}
+.ph-save{flex:1.3;background:#fff;border:none;color:#1c1c1e}
+.p-grid{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-content:start}
+.pcard{border-radius:18px;padding:18px;position:relative;cursor:pointer;transition:transform 250ms cubic-bezier(.4,0,.2,1),box-shadow 250ms}
+.pcard:hover{transform:translateY(-6px);box-shadow:0 18px 30px rgba(0,0,0,.12)}
+.pcard.on{box-shadow:0 0 0 2.5px #1c1c1e,0 14px 26px rgba(0,0,0,.1)}
+.pbadge{position:absolute;top:14px;left:14px;z-index:2;display:flex;align-items:center;gap:4px;background:#1c1c1e;color:white;font-size:9px;font-weight:700;letter-spacing:.08em;padding:5px 9px;border-radius:20px;text-transform:uppercase}
+.worn-badge{position:absolute;top:14px;right:14px;z-index:2;display:flex;align-items:center;gap:3px;background:#fff;color:#1c1c1e;font-size:8.5px;font-weight:700;padding:5px 8px;border-radius:20px;text-transform:uppercase}
+.picon{aspect-ratio:2/2.4;width:100%;margin-bottom:14px}
+.pname{font-size:14px;font-weight:600;color:#1c1c1e;margin:0 0 4px;line-height:1.3}
+.prow{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.pprice{font-size:14.5px;font-weight:700;color:#1c1c1e}
+.pstat{font-size:10px;font-weight:600;color:#2e9e5b}
+.qadd{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid #1c1c1e;border-radius:30px;padding:9px 0;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background 200ms,color 200ms;background:transparent;color:#1c1c1e}
+.pcard.on .qadd{background:#1c1c1e;color:white}
+#shop-pg{display:none;min-height:100vh;background:#FAF6F1}
+.sh-hdr{display:flex;align-items:center;justify-content:space-between;padding:22px 48px;border-bottom:1px solid rgba(0,0,0,.08);position:sticky;top:0;background:#FAF6F1;z-index:10}
+.sh-back{display:flex;align-items:center;gap:6px;background:transparent;border:none;cursor:pointer;font-size:11.5px;font-weight:700;letter-spacing:.08em;color:#1c1c1e;text-transform:uppercase}
+.sh-brand{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:.06em;color:#1c1c1e}
+.sh-cnt{font-size:10.5px;color:#8a8a8a;font-weight:600}
+.sh-body{padding:48px 48px 0}
+.sh-title{font-family:'Anton',sans-serif;font-size:clamp(36px,5vw,56px);text-transform:uppercase;color:#1c1c1e;margin:0 0 18px;line-height:1}
+.sh-filters{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:32px}
+.flt{flex-shrink:0;padding:9px 18px;border-radius:30px;border:1.5px solid rgba(0,0,0,.15);background:transparent;color:#1c1c1e;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:all 200ms}
+.flt.on{border-color:#1c1c1e;background:#1c1c1e;color:#fff}
+.sh-grid{padding:0 48px 88px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.sh-card{border-radius:18px;padding:16px;cursor:pointer;transition:transform 250ms,box-shadow 250ms}
+.sh-card:hover{transform:translateY(-5px);box-shadow:0 18px 28px rgba(0,0,0,.1)}
+.sh-cname{font-size:13.5px;font-weight:600;color:#1c1c1e;margin:0 0 4px;line-height:1.3}
+.sh-crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.sh-price{font-size:14px;font-weight:700;color:#1c1c1e}
+.sh-cat{font-size:9px;font-weight:600;color:#8a8a8a;text-transform:uppercase;letter-spacing:.04em}
+.sh-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:6px;background:transparent;border:1.5px solid #1c1c1e;color:#1c1c1e;border-radius:30px;padding:9px 0;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:background 200ms,color 200ms}
+.sh-card:hover .sh-btn{background:#1c1c1e;color:#fff}
+@media(max-width:640px){
+  #nav-l{left:16px}#nav-r{right:16px}
+  #ctrl-left{bottom:24px!important;left:16px!important}
+  #shop-btn{bottom:24px!important;right:16px!important;font-size:18px!important}
+  #dots{right:10px}
+  .nbtn{width:46px;height:46px}
+  #slide-dsc{display:none}
+  #trending-sec{padding:56px 18px}
+  .t-body{flex-direction:column}
+  .phone{flex:unset;margin:0 auto;max-width:280px;width:100%}
+  .p-grid{grid-template-columns:1fr 1fr;gap:14px}
+  .sh-hdr{padding:16px}
+  .sh-body{padding:22px 16px 0}
+  .sh-grid{padding:0 16px 60px;grid-template-columns:1fr 1fr;gap:14px}
+}
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="home-pg">
+  <div id="hero-bg">
+    <div id="hero-inner">
+      <div id="grain"></div>
+      <div id="bot-grad"></div>
+      <div id="ghost"><span>HARS</span></div>
+      <div id="nav-l">HARS</div>
+      <div id="nav-r">SS '25</div>
+      <div id="nav-c"></div>
+      <div id="carousel"></div>
+      <div id="ctrl-left">
+        <p id="slide-lbl"></p>
+        <p id="slide-dsc"></p>
+        <div class="nav-btns">
+          <button class="nbtn" id="btn-prev"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></button>
+          <button class="nbtn" id="btn-next"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+      <button id="shop-btn">SHOP NOW <svg style="width:30px;height:30px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      <div id="dots"></div>
+    </div>
+  </div>
+  <section id="trending-sec">
+    <div class="t-inner">
+      <div class="t-toprow">
+        <div class="t-live"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d6446c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>Live this week</div>
+        <button class="t-viewall" id="view-all-btn">View all in shop <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+      <div class="t-titlerow">
+        <h2 class="t-title">Trending Now</h2>
+        <p class="t-sub">Tap any piece to try it on — no app, no upload.</p>
+      </div>
+      <div class="t-body">
+        <div class="phone">
+          <div class="ph-topbar">
+            <div class="ph-dots"><span class="ph-dot"></span><span class="ph-dot"></span></div>
+            <div class="ph-lbl"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#ffb86b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>HARS AI TRY-ON</div>
+          </div>
+          <div class="ph-screen">
+            <div id="figure-wrap" style="width:100%;height:100%"></div>
+            <div class="styling-ov" id="styling-ov"><span class="styling-txt">✦ Styling your look…</span></div>
+          </div>
+          <div class="ph-info">
+            <p class="ph-name" id="ph-name"></p>
+            <p class="ph-meta" id="ph-meta"></p>
+            <div class="ph-acts">
+              <button class="ph-btn ph-reset"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>Reset</button>
+              <button class="ph-btn ph-save"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>Save Look</button>
+            </div>
+          </div>
+        </div>
+        <div class="p-grid" id="p-grid"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SHOP -->
+<div id="shop-pg">
+  <div class="sh-hdr">
+    <button class="sh-back" id="back-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back</button>
+    <span class="sh-brand">HARS</span>
+    <span class="sh-cnt" id="sh-cnt"></span>
+  </div>
+  <div class="sh-body">
+    <h1 class="sh-title">Shop All</h1>
+    <div class="sh-filters" id="sh-filters"></div>
+  </div>
+  <div class="sh-grid" id="sh-grid"></div>
+</div>
+
+<script>
+const SLIDES=[
+  {bg:"#C9C2B4",line:"#6b6357",label:"WIDE-LEG EDIT",desc:"Baggy denim, easy layers. The everyday street uniform, perfected."},
+  {bg:"#B8A99A",line:"#5c4a3a",label:"CROP & LAYER",desc:"Crop tops under oversized jackets. Built for that thrown-together-but-not look."},
+  {bg:"#E0BFC4",line:"#8a5f68",label:"PLEATED MOOD",desc:"Mini pleats, soft knits. Y2K nostalgia with a cleaner finish."},
+  {bg:"#A9B3C9",line:"#2e3650",label:"OVERSIZED HOODIE",desc:"Drop shoulders, longer hems. Comfort that still looks put-together."},
+  {bg:"#93A8C2",line:"#3d5170",label:"DENIM ON DENIM",desc:"Tonal washes, head to toe. The double-denim moment, done right."},
+  {bg:"#ACA88E",line:"#4a4a3c",label:"COAST SPORT",desc:"Varsity hoodies, grey shorts, fresh kicks. Off-duty, on trend."},
+];
+const TRENDING=[
+  {name:"Garden Romance Dress",price:"₹4,250",stat:"+71% this week",type:"dress",color:"#A9C8E8",line:"#9c7c5c",tint:"#FBF3EC",decor:"floral"},
+  {name:"Glamoratti Power Blazer",price:"₹5,400",stat:"+88% this week",type:"blazer",color:"#1c1c1e",line:"#d4af6a",tint:"#efece6",decor:"goldtrim"},
+  {name:"Retro Windbreaker",price:"₹3,100",stat:"+64% this week",type:"hoodie",color:"#d6446c",line:"#2e3650",tint:"#f3e3e8",decor:"stripe"},
+  {name:"Capri Trouser Set",price:"₹2,800",stat:"+47% this week",type:"pants",color:"#e8dcc8",line:"#8a7250",tint:"#f5efe2"},
+  {name:"Monochrome Column Dress",price:"₹3,900",stat:"+55% this week",type:"dress",color:"#1c1c1e",line:"#aaaaaa",tint:"#ececec"},
+  {name:"Regal Purple Wrap Dress",price:"₹4,100",stat:"+92% this week",type:"dress",color:"#6b4d8a",line:"#4a3360",tint:"#efe6f3"},
+  {name:"Gold Cuff Co-ord Top",price:"₹2,650",stat:"+58% this week",type:"shirt",color:"#caa15a",line:"#d4af6a",tint:"#f6ecdd",decor:"goldtrim"},
+  {name:"Baggy Cargo Pants",price:"₹2,950",stat:"+76% this week",type:"pants",color:"#9a9486",line:"#4a4638",tint:"#efece4",decor:"cargo"},
+  {name:"Graphic Crew Shirt",price:"₹1,950",stat:"+69% this week",type:"shirt",color:"#f4f1ea",line:"#2e2e2e",tint:"#f0eee8",decor:"graphic"},
+];
+const CATMAP={dress:"Dresses",blazer:"Outerwear",hoodie:"Outerwear",shirt:"Tops",pants:"Bottoms",skirt:"Bottoms"};
+const GREG={dress:{topY:132,h:280},blazer:{topY:132,h:160},shirt:{topY:132,h:150},hoodie:{topY:126,h:175},skirt:{topY:270,h:150},pants:{topY:265,h:250}};
+const N=SLIDES.length;
+const GRAIN_URL=`url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E")`;
+
+let active=0, busy=false, tryOnIdx=0, shopCat="All";
+let mob=window.innerWidth<640;
+
+// SVG helpers
+function f(v){return parseFloat(v.toFixed(2))}
+function gpx(t,x,y,w,h){
+  if(t==="dress")  return[[x-.22*w,y],[x-.4*w,y+.12*h],[x-.16*w,y+.32*h],[x-.42*w,y+h],[x+.42*w,y+h],[x+.16*w,y+.32*h],[x+.4*w,y+.12*h],[x+.22*w,y]];
+  if(t==="blazer") return[[x-.3*w,y],[x-.08*w,y+.14*h],[x,y],[x+.08*w,y+.14*h],[x+.3*w,y],[x+.4*w,y+.1*h],[x+.34*w,y+h],[x-.34*w,y+h],[x-.4*w,y+.1*h]];
+  if(t==="shirt")  return[[x-.3*w,y],[x-.4*w,y+.09*h],[x-.32*w,y+.16*h],[x-.28*w,y+.09*h],[x-.28*w,y+h],[x+.28*w,y+h],[x+.28*w,y+.09*h],[x+.32*w,y+.16*h],[x+.4*w,y+.09*h],[x+.3*w,y]];
+  if(t==="pants")  return[[x-.22*w,y],[x+.22*w,y],[x+.48*w,y+h],[x+.06*w,y+h],[x,y+.55*h],[x-.06*w,y+h],[x-.48*w,y+h]];
+  if(t==="hoodie") return[[x-.34*w,y+.08*h],[x-.46*w,y+.16*h],[x-.36*w,y+.24*h],[x-.32*w,y+.16*h],[x-.32*w,y+h],[x+.32*w,y+h],[x+.32*w,y+.16*h],[x+.36*w,y+.24*h],[x+.46*w,y+.16*h],[x+.34*w,y+.08*h]];
+  return[[x-.16*w,y],[x+.16*w,y],[x+.42*w,y+h],[x-.42*w,y+h]];
+}
+function gb(t,x,y,w,h,c,l,d){
+  const p=gpx(t,x,y,w,h).map(pt=>pt.map(v=>f(v)).join(',')).join(' ');
+  let s=`<polygon points="${p}" fill="${c}" opacity=".95" stroke="${l}" stroke-opacity=".18" stroke-width="1"/>`;
+  if(t==="hoodie"){s+=`<path d="M${f(x-.2*w)} ${f(y+.06*h)} q${f(.2*w)} ${f(-.16*h)} ${f(.4*w)} 0" fill="none" stroke="${l}" stroke-width="2.5" opacity=".7"/>`;s+=`<rect x="${f(x-.14*w)}" y="${f(y+.62*h)}" width="${f(.28*w)}" height="${f(.16*h)}" rx="6" fill="none" stroke="${l}" stroke-width="2" opacity=".55"/>`;}
+  if(t==="pants"&&d==="cargo"){s+=`<rect x="${f(x-.4*w)}" y="${f(y+.55*h)}" width="${f(.14*w)}" height="${f(.12*h)}" rx="3" fill="none" stroke="${l}" stroke-width="1.8" opacity=".6"/>`;s+=`<rect x="${f(x+.26*w)}" y="${f(y+.55*h)}" width="${f(.14*w)}" height="${f(.12*h)}" rx="3" fill="none" stroke="${l}" stroke-width="1.8" opacity=".6"/>`;}
+  if(d==="pleats"){s+=`<g opacity=".5">`;[-0.28,-0.14,0,0.14,0.28].forEach(v=>{s+=`<line x1="${f(x+v*w)}" y1="${f(y+.1*h)}" x2="${f(x+v*1.6*w)}" y2="${f(y+h)}" stroke="${l}" stroke-width="1.5"/>`;});s+=`</g>`;}
+  if(d==="floral"){s+=`<path d="M${f(x-.22*w)} ${f(y+6)} q 8 9 16 0 q 8 9 16 0 q 8 9 16 0 q 8 9 16 0" fill="none" stroke="#fff" stroke-width="2" opacity=".9"/>`;s+=`<circle cx="${f(x-.12*w)}" cy="${f(y+.2*h)}" r="5" fill="#f4b8c4" opacity=".9"/>`;s+=`<circle cx="${f(x+.06*w)}" cy="${f(y+.27*h)}" r="4.5" fill="#f7d9a0" opacity=".9"/>`;s+=`<circle cx="${f(x-.04*w)}" cy="${f(y+.34*h)}" r="4" fill="#fff" opacity=".9"/>`;s+=`<circle cx="${f(x+.15*w)}" cy="${f(y+.22*h)}" r="4" fill="#e7a9c2" opacity=".9"/>`;}
+  if(d==="goldtrim"){[.15,.36,.57,.78].forEach(v=>{s+=`<circle cx="${x}" cy="${f(y+v*h)}" r="3" fill="#d4af6a" opacity=".95"/>`;});s+=`<line x1="${f(x-.3*w)}" y1="${f(y+.97*h)}" x2="${f(x+.3*w)}" y2="${f(y+.97*h)}" stroke="#d4af6a" stroke-width="2" opacity=".8"/>`;}
+  if(d==="stripe")s+=`<line x1="${f(x-.4*w)}" y1="${f(y+.15*h)}" x2="${f(x+.4*w)}" y2="${f(y+.85*h)}" stroke="#fff" stroke-width="7" opacity=".55" stroke-linecap="round"/>`;
+  if(d==="graphic")s+=`<g opacity=".6"><circle cx="${x}" cy="${f(y+.22*h)}" r="2" fill="${l}"/><polygon points="${x},${f(y+.27*h)} ${f(x-.06*w)},${f(y+.38*h)} ${f(x+.06*w)},${f(y+.38*h)}" fill="none" stroke="${l}" stroke-width="2" stroke-linejoin="round"/></g>`;
+  return`<g>${s}</g>`;
+}
+function gar(x,y,w,h,c,t,hc,d){
+  return`<line x1="${x}" y1="${y-22}" x2="${x}" y2="${y-12}" stroke="${hc}" stroke-width="2"/><circle cx="${x}" cy="${y-24}" r="3.5" fill="none" stroke="${hc}" stroke-width="2"/><polyline points="${x-26},${y-2} ${x},${y-12} ${x+26},${y-2}" fill="none" stroke="${hc}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${gb(t,x,y,w,h,c,hc,d)}`;
+}
+function rail(l,y=50,x1=40,x2=360){return`<line x1="${x1}" y1="14" x2="${x1}" y2="${y}" stroke="${l}" stroke-width="4" stroke-linecap="round"/><line x1="${x2}" y1="14" x2="${x2}" y2="${y}" stroke="${l}" stroke-width="4" stroke-linecap="round"/><line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}" stroke="${l}" stroke-width="5" stroke-linecap="round"/>`;}
+function shoe(x,y,c,l){return`<path d="M${x-30} ${y} q-4-16 14-18 l28-2 q14-10 26-2 q10 6 6 16 q-2 6-10 6 z" fill="${c}" stroke="${l}" stroke-width="1.5" opacity=".9"/>`;}
+function fr(inner){return`<svg viewBox="0 0 400 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">${inner}</svg>`;}
+function scene(i,l){
+  const sc=[
+    ()=>fr(rail(l)+gar(90,66,95,260,"#7b93b0","pants",l,"cargo")+gar(185,66,85,180,"#fff","shirt",l)+gar(275,66,100,240,"#c9b896","pants",l)+gar(345,66,75,190,"#f3efe6","blazer",l)+shoe(120,560,"#fff",l)),
+    ()=>fr(rail(l)+gar(95,66,80,150,"#fff","shirt",l)+gar(180,66,95,210,"#6b4f3a","blazer",l)+gar(270,66,95,250,"#9fb3c8","pants",l,"cargo")+gar(345,66,75,150,"#c9b896","skirt",l,"pleats")),
+    ()=>fr(rail(l)+gar(100,66,90,190,"#c9b896","skirt",l,"pleats")+gar(185,66,80,150,"#e8b4c4","shirt",l)+gar(265,66,95,200,"#f3efe6","blazer",l)+gar(340,66,85,230,"#9a9a92","pants",l)),
+    ()=>fr(rail(l)+gar(100,70,110,230,"#34406b","hoodie",l)+gar(210,66,85,250,"#e8e2d4","pants",l)+gar(300,66,80,160,"#fff","shirt",l)+shoe(330,560,"#fff",l)),
+    ()=>fr(rail(l)+gar(100,66,95,200,"#7b93b0","blazer",l)+gar(195,66,95,250,"#5d7493","pants",l,"cargo")+gar(290,66,80,160,"#fff","shirt",l)+gar(355,66,70,150,"#8fa6c2","skirt",l,"pleats")),
+    ()=>fr(rail(l)+gar(100,70,105,220,"#b9bcc1","hoodie",l)+gar(205,66,75,140,"#cfcfc7","skirt",l)+gar(290,66,80,160,"#fff","shirt",l)+gar(355,66,75,220,"#6b6f54","pants",l,"cargo")+shoe(130,560,"#fff",l)),
+  ];
+  return sc[i]?sc[i]():'';
+}
+const TH={dress:170,blazer:130,shirt:108,hoodie:140,pants:175,skirt:120};
+function trendIcon(item){const h=TH[item.type]||150;return`<svg viewBox="0 0 200 260" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"><line x1="100" y1="16" x2="100" y2="36" stroke="${item.line}" stroke-width="3" stroke-linecap="round"/>${gar(100,56,120,h,item.color,item.type,item.line,item.decor)}</svg>`;}
+function figSVG(item){const r=GREG[item.type]||{topY:130,h:220};return`<svg viewBox="0 0 300 540" width="100%" height="100%" style="animation:tryOnIn 480ms cubic-bezier(.4,0,.2,1)"><ellipse cx="150" cy="68" rx="30" ry="34" fill="#E3C2A0"/><rect x="138" y="94" width="24" height="26" fill="#E3C2A0"/><path d="M104 165 Q150 116 196 165 L206 248 Q150 270 94 248 Z" fill="#F1EDE5"/><rect x="78" y="160" width="22" height="158" rx="11" fill="#F1EDE5"/><rect x="200" y="160" width="22" height="158" rx="11" fill="#F1EDE5"/><rect x="116" y="248" width="24" height="240" rx="11" fill="#F1EDE5"/><rect x="160" y="248" width="24" height="240" rx="11" fill="#F1EDE5"/><line x1="150" y1="248" x2="150" y2="488" stroke="#e2dccf" stroke-width="2"/><path d="M122 44 q28-36 56 0 q5 32-9 42 q-19-15-38 0 q-14-10-9-42 Z" fill="#3b2a20" opacity=".85"/>${gb(item.type,150,r.topY,150,r.h,item.color,item.line,item.decor)}</svg>`;}
+
+// Carousel
+function rp(idx,a,n){let r=(idx-a+n)%n;if(r>n/2)r-=n;return r;}
+function styleItem(el,idx){
+  const r=rp(idx,active,N),m=mob;
+  const T='transform 650ms cubic-bezier(.4,0,.2,1),filter 650ms cubic-bezier(.4,0,.2,1),opacity 650ms cubic-bezier(.4,0,.2,1),left 650ms cubic-bezier(.4,0,.2,1)';
+  el.style.transition=T;
+  if(r===0){el.style.cssText+=`;transform:translateX(-50%) scale(${m?1.05:1.32});filter:blur(0px);opacity:1;z-index:30;left:50%;height:${m?'66%':'86%'};bottom:0;border-radius:${m?'16px 16px 0 0':'22px 22px 0 0'}`;}
+  else if(r===1){el.style.cssText+=`;transform:translateX(-50%) scale(1);filter:blur(1px);opacity:.82;z-index:20;left:${m?'84%':'76%'};height:${m?'44%':'56%'};bottom:${m?'6%':'4%'};border-radius:14px`;}
+  else if(r===-1){el.style.cssText+=`;transform:translateX(-50%) scale(1);filter:blur(1px);opacity:.82;z-index:20;left:${m?'16%':'24%'};height:${m?'44%':'56%'};bottom:${m?'6%':'4%'};border-radius:14px`;}
+  else if(r===2){el.style.cssText+=`;transform:translateX(-50%) scale(1);filter:blur(3px);opacity:.4;z-index:10;left:${m?'104%':'96%'};height:${m?'28%':'36%'};bottom:${m?'8%':'6%'};border-radius:14px`;}
+  else if(r===-2){el.style.cssText+=`;transform:translateX(-50%) scale(1);filter:blur(3px);opacity:.4;z-index:10;left:${m?'-4%':'4%'};height:${m?'28%':'36%'};bottom:${m?'8%':'6%'};border-radius:14px`;}
+  else{el.style.cssText+=`;transform:translateX(-50%) scale(1);filter:blur(4px);opacity:0;z-index:1;left:${r>0?'120%':'-20%'};height:24%;bottom:6%`;}
+}
+function buildCarousel(){
+  const c=document.getElementById('carousel');c.innerHTML='';
+  SLIDES.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='ci';
+    d.innerHTML=scene(i,s.line);
+    d.style.transition='none';c.appendChild(d);
+    styleItem(d,i);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>styleItem(d,i)));
+  });
+}
+function buildDots(){
+  const c=document.getElementById('dots');c.innerHTML='';
+  SLIDES.forEach((_,i)=>{const b=document.createElement('button');b.className='dot-btn'+(i===active?' on':'');b.onclick=()=>jumpTo(i);c.appendChild(b);});
+}
+function updateHero(){
+  document.getElementById('hero-bg').style.backgroundColor=SLIDES[active].bg;
+  document.getElementById('nav-c').textContent=SLIDES[active].label;
+  document.getElementById('slide-lbl').textContent=SLIDES[active].label;
+  document.getElementById('slide-dsc').textContent=SLIDES[active].desc;
+  document.querySelectorAll('.ci').forEach((el,i)=>styleItem(el,i));
+  document.querySelectorAll('.dot-btn').forEach((b,i)=>b.classList.toggle('on',i===active));
+}
+function navigate(dir){if(busy)return;busy=true;active=dir==='next'?(active+1)%N:(active+N-1)%N;updateHero();setTimeout(()=>busy=false,650);}
+function jumpTo(i){if(busy||i===active)return;busy=true;active=i;updateHero();setTimeout(()=>busy=false,650);}
+
+// Trending
+function updateTryOn(){
+  const item=TRENDING[tryOnIdx];
+  document.getElementById('figure-wrap').innerHTML=figSVG(item);
+  document.getElementById('ph-name').textContent=item.name;
+  document.getElementById('ph-meta').textContent=item.price+' · '+item.stat;
+}
+const FLAMEBADGE=`<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ffb86b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`;
+const BAGICO=`<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`;
+function buildGrid(){
+  const g=document.getElementById('p-grid');g.innerHTML='';
+  TRENDING.forEach((item,i)=>{
+    const card=document.createElement('div');
+    card.className='pcard'+(i===tryOnIdx?' on':'');
+    card.style.background=item.tint;
+    card.innerHTML=`<div class="pbadge">${FLAMEBADGE} Trending</div>${i===tryOnIdx?`<div class="worn-badge">✦ Worn</div>`:''}<div class="picon">${trendIcon(item)}</div><p class="pname">${item.name}</p><div class="prow"><span class="pprice">${item.price}</span><span class="pstat">${item.stat}</span></div><button class="qadd">${BAGICO} Quick Add</button>`;
+    card.addEventListener('click',()=>{
+      if(i===tryOnIdx)return;
+      const ov=document.getElementById('styling-ov');
+      ov.classList.add('show');tryOnIdx=i;
+      setTimeout(()=>{updateTryOn();ov.classList.remove('show');buildGrid();},520);
+    });
+    g.appendChild(card);
+  });
+}
+
+// Shop
+function goShop(){document.getElementById('home-pg').style.display='none';document.getElementById('shop-pg').style.display='block';shopCat='All';buildShop();window.scrollTo(0,0);}
+function goHome(){document.getElementById('shop-pg').style.display='none';document.getElementById('home-pg').style.display='block';window.scrollTo(0,0);}
+function buildShop(){
+  const cats=["All","Dresses","Tops","Bottoms","Outerwear"];
+  const fb=document.getElementById('sh-filters');fb.innerHTML='';
+  cats.forEach(c=>{const b=document.createElement('button');b.className='flt'+(c===shopCat?' on':'');b.textContent=c;b.onclick=()=>{shopCat=c;buildShop();};fb.appendChild(b);});
+  const filtered=shopCat==='All'?TRENDING:TRENDING.filter(p=>CATMAP[p.type]===shopCat);
+  document.getElementById('sh-cnt').textContent=filtered.length+' ITEMS';
+  const grid=document.getElementById('sh-grid');grid.innerHTML='';
+  filtered.forEach(item=>{
+    const card=document.createElement('div');card.className='sh-card';card.style.background=item.tint;
+    card.innerHTML=`<div class="picon">${trendIcon(item)}</div><p class="sh-cname">${item.name}</p><div class="sh-crow"><span class="sh-price">${item.price}</span><span class="sh-cat">${CATMAP[item.type]}</span></div><button class="sh-btn">${BAGICO} Quick Add</button>`;
+    grid.appendChild(card);
+  });
+}
+
+// Init
+function init(){
+  document.getElementById('grain').style.backgroundImage=GRAIN_URL;
+  buildCarousel();buildDots();
+  document.getElementById('hero-bg').style.backgroundColor=SLIDES[0].bg;
+  document.getElementById('nav-c').textContent=SLIDES[0].label;
+  document.getElementById('slide-lbl').textContent=SLIDES[0].label;
+  document.getElementById('slide-dsc').textContent=SLIDES[0].desc;
+  document.getElementById('btn-prev').onclick=()=>navigate('prev');
+  document.getElementById('btn-next').onclick=()=>navigate('next');
+  document.getElementById('shop-btn').onclick=goShop;
+  document.getElementById('view-all-btn').onclick=goShop;
+  document.getElementById('back-btn').onclick=goHome;
+  updateTryOn();buildGrid();
+  window.addEventListener('resize',()=>{mob=window.innerWidth<640;document.querySelectorAll('.ci').forEach((el,i)=>styleItem(el,i));});
+}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
